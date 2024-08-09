@@ -3,6 +3,6 @@ register as per role and than login and get information
 -- Nothing to do 
 --- Clon the repo and open in us code or pycharm
 --- and un the project
---- For run the project go to terminal on vs code or pycharm check the directory of project and run the folloeing command!!!!!!!!!⁉⁉⁉⁉⁉⁉⁉⁉⁉⁉
+--- For run the project go to terminal on vs code or pycharm check the directory of project and run the folloeing command
 
------------- python manage.py runserver ------------
+------------Command = python manage.py runserver ------------
