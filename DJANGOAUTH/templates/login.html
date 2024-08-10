@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registration Form</title>
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
+            rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <style>
+            .registration-form {
+                background: #f7f7f7;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0px 0px 10px 0px #000;
+            }
+
+            .password-toggle {
+                cursor: pointer;
+                position: absolute;
+                right: 15px;
+                top: 38px;
+            }
+
+            .from-icon {
+                cursor: pointer;
+                margin-left: 210px;
+                margin-top: 20px;
+            }
+
+            .btn {
+                margin-top: 10px;
+            }
+
+            .custom-hr {
+                border: 2px solid rgba(0, 0, 0, 0.521);
+            }
+
+
+            .form-icon-container {
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .form-icon-container a {
+                color: #333;
+                font-size: 25px;
+                text-decoration: none;
+            }
+
+            .form-icon-container a:hover {
+                color: #007bff;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        {%for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message :</strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+        <div class="container mt-5 d-flex justify-content-center">
+            <div class="col-md-6 registration-form">
+                <h2 class="text-center mb-4">Login Form</h2>
+                <form action="/login" method="post">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="Email_Id">Email Id</label>
+                        <input type="email" class="form-control" name="Email_Id" id="Email_Id" placeholder="Enter email"
+                            required>
+                    </div>
+
+
+                    <div class="form-group position-relative">
+                        <label for="Password">Password</label>
+                        <input type="password" class="form-control" name="Password" id="Password"
+                            placeholder="Enter password" required>
+                        <i class="bi bi-eye-slash password-toggle" id="togglePassword"></i>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+                <a href="/register"><button type="submit" class="btn btn-primary btn-block btn">Register</button></a>
+
+                <hr class="custom-hr">
+
+                <div class="form-icon-container">
+                    <a href="mailto:veduthate1234@gmail.com" title="Email">
+                        <i class="bi bi-envelope"></i>
+                    </a>
+                    <a href="https://www.facebook.com" title="Facebook" target="_blank">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="https://www.instagram.com" title="Instagram" target="_blank">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+
+        <script>
+            document.querySelector('#togglePassword').addEventListener('click', function (e) {
+                const password = document.querySelector('#Password');
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                this.classList.toggle('bi-eye');
+                this.classList.toggle('bi-eye-slash');
+            });
+
+        </script>
+    </body>
+</html>
+</body>
+
+</html>
