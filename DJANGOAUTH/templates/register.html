@@ -1,0 +1,152 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+
+        <link href="{% static 'css/reg.css' %}">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
+            rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <style>
+            .registration-form {
+                background: #f7f7f7;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0px 0px 10px 0px #000;
+            }
+
+            .btn {
+                margin-top: 10px;
+            }
+
+            .password-toggle {
+                cursor: pointer;
+                position: absolute;
+                right: 15px;
+                top: 38px;
+            }
+        </style>
+</head>
+
+<body>
+    {%for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message :</strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="col-md-7 registration-form">
+            <h2 class="text-center mb-4">Registration Form</h2>
+            <form action="/register" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="role">Role:</label>
+                    <select class="form-control" name="role" id="role" required>
+                    <option value="Patient">Patient</option>
+                    <option value="Doctor">Doctor</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="First_Name">First Name</label>
+                    <input type="text" class="form-control" name="First_Name" id="First_Name"
+                        placeholder="Enter first name" required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="Last_Name">Last Name</label>
+                    <input type="text" class="form-control" name="Last_Name" id="Last_Name"
+                        placeholder="Enter last name" required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="Profile_Picture">Profile Picture</label>
+                    <input type="file" class="form-control-file" name="Profile_Picture" id="Profile_Picture" required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="Username">Username</label>
+                    <input type="text" class="form-control" name="Username" id="Username" placeholder="Enter username"
+                        required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="Email_Id">Email Id</label>
+                    <input type="email" class="form-control" name="Email_Id" id="Email_Id" placeholder="Enter email"
+                        required>
+                </div>
+
+
+                <div class="form-group position-relative">
+                    <label for="Password">Password</label>
+                    <input type="password" class="form-control" name="Password" id="Password"
+                        placeholder="Enter password" required>
+                    <i class="bi bi-eye-slash password-toggle" id="togglePassword"></i>
+                </div>
+
+
+                <div class="form-group position-relative">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="text" class="form-control" name="confirmPassword" id="confirmPassword"
+                        placeholder="Confirm password" required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="Address_Line1">Address Line 1</label>
+                    <input type="text" class="form-control" name="Address_Line1" id="Address_Line1"
+                        placeholder="Enter address line 1" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="City">City</label>
+                        <input type="text" class="form-control" name="City" id="City" placeholder="Enter city" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="State">State</label>
+                        <input type="text" class="form-control" name="State" id="State" placeholder="Enter state"
+                            required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="Pincode">Pincode</label>
+                        <input type="text" class="form-control" name="Pincode" id="Pincode" placeholder="Enter pincode"
+                            required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </form>
+            <a href="/login"><button type="submit" class="btn btn-primary btn-block  btn">Login</button></a>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('#togglePassword').addEventListener('click', function (e) {
+            const password = document.querySelector('#Password');
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('bi-eye');
+            this.classList.toggle('bi-eye-slash');
+        });
+    </script>
+    
+</body>
+
+</html>
